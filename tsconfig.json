@@ -5,9 +5,6 @@
       "target": "ES2022",
       "module": "CommonJS",
       "removeComments": true,
-      "outDir": "dist",
-      "paths": {
-        "@": ["./scr"]
-      }
+      "outDir": "dist"
     },
   }

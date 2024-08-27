@@ -1,0 +1,13 @@
+{
+    "include": ["src"],
+    "exclude": ["node_modules"],
+    "compilerOptions": {
+      "target": "ES2022",
+      "module": "CommonJS",
+      "removeComments": true,
+      "outDir": "dist",
+      "paths": {
+        "@": ["./scr"]
+      }
+    },
+  }

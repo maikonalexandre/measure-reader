@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: bitnami/postgresql:latest
+    environment:
+      POSTGRESQL_PASSWORD: password
+      POSTGRESQL_USER: user
+      POSTGRESQL_DATABASE: db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/bitnami/postgresql
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3333"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
+

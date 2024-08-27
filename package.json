@@ -1,10 +1,11 @@
 {
   "name": "shopper",
   "version": "1.0.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "dev": "tsx --env-file=arquivo.env src/main.ts",
     "dev:watch": "tsx --watch --env-file=arquivo.env src/main.ts",
+    "seed": "tsx ./prisma/seed.ts",
     "build": "tsc"
   },
   "main": "index.js",
@@ -18,6 +19,7 @@
   },
   "dependencies": {
     "@fastify/cors": "^9.0.1",
+    "@prisma/client": "5.19.0",
     "fastify": "^4.28.1",
     "zod": "^3.23.8"
   }

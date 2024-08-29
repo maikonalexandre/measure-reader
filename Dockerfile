@@ -8,6 +8,7 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 RUN yarn build
+RUN yarn prisma generate
 
 EXPOSE 3000
 

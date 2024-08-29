@@ -17,8 +17,9 @@ model Measure {
     measure_datetime DateTime
     measure_type     MeasureType
     has_confirmed    Boolean
-    image_url        String
+    image_address    String
     customer_code    String
+    measure_value    Int
 
     @@map("measure")
 }

@@ -7,8 +7,9 @@ CREATE TABLE "measure" (
     "measure_datetime" TIMESTAMP(3) NOT NULL,
     "measure_type" "MeasureType" NOT NULL,
     "has_confirmed" BOOLEAN NOT NULL,
-    "image_url" TEXT NOT NULL,
+    "image_address" TEXT NOT NULL,
     "customer_code" TEXT NOT NULL,
+    "measure_value" INTEGER NOT NULL,
 
     CONSTRAINT "measure_pkey" PRIMARY KEY ("id")
 );

@@ -6,10 +6,10 @@ async function seed() {
 	await prisma.measure.create({
 		data: {
 			customer_code: 'customer_code',
-			datetime: new Date(),
+			measure_datetime: new Date(),
 			has_confirmed: true,
 			image_url: 'imgurl',
-			type: 'GAS',
+			measure_type: 'GAS',
 		},
 	});
 }

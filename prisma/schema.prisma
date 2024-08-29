@@ -13,12 +13,12 @@ enum MeasureType {
 }
 
 model Measure {
-    id            String      @id @unique @default(uuid())
-    datetime      DateTime
-    type          MeasureType
-    has_confirmed Boolean
-    image_url     String
-    customer_code String
+    id               String      @id @unique @default(uuid())
+    measure_datetime DateTime
+    measure_type     MeasureType
+    has_confirmed    Boolean
+    image_url        String
+    customer_code    String
 
     @@map("measure")
 }

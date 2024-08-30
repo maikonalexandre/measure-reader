@@ -6,5 +6,5 @@ import { upload } from '../controllers/measure/upload';
 export async function appRoutes(app: FastifyInstance) {
 	app.post('/upload', upload);
 	app.patch('/confirm', confirm);
-	app.get('/:costumer_code/list', list);
+	app.get('/:customer_code/list', list);
 }

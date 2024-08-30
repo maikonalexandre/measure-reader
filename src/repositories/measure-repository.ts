@@ -26,9 +26,14 @@ export type GetMeasureByIdProps = {
 	measure_uuid: string;
 };
 
-export type UpdateMeasure = {
+export type UpdateMeasureProps = {
 	measure_uuid: string;
 	confirmed_value: number;
+};
+
+export type ListMeasureByCustomerProps = {
+	customer_code: string;
+	measure_type?: 'WATER' | 'GAS';
 };
 
 export interface MeasureRepository {
@@ -37,5 +42,8 @@ export interface MeasureRepository {
 		data: GetMeasureByCustomerProps,
 	) => Promise<Measure | null>;
 	getMeasureById: (data: GetMeasureByIdProps) => Promise<Measure | null>;
-	updateMeasure: (data: UpdateMeasure) => Promise<Measure | null>;
+	updateMeasure: (data: UpdateMeasureProps) => Promise<Measure | null>;
+	listMeasureByCustomer: (
+		data: ListMeasureByCustomerProps,
+	) => Promise<Measure[] | null>;
 }

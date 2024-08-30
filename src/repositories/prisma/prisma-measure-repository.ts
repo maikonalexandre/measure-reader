@@ -3,8 +3,9 @@ import type {
 	CreateImageProps,
 	GetMeasureByCustomerProps,
 	GetMeasureByIdProps,
+	ListMeasureByCustomerProps,
 	MeasureRepository,
-	UpdateMeasure,
+	UpdateMeasureProps,
 } from '../measure-repository';
 
 import { endOfMonth, startOfMonth } from 'date-fns';
@@ -62,7 +63,7 @@ class PrismaMeasureRepository implements MeasureRepository {
 		return measure;
 	}
 
-	async updateMeasure({ confirmed_value, measure_uuid }: UpdateMeasure) {
+	async updateMeasure({ confirmed_value, measure_uuid }: UpdateMeasureProps) {
 		const measure = await prisma.measure.update({
 			where: {
 				id: measure_uuid,
@@ -73,6 +74,20 @@ class PrismaMeasureRepository implements MeasureRepository {
 			},
 		});
 		return measure;
+	}
+
+	async listMeasureByCustomer({
+		customer_code,
+		measure_type,
+	}: ListMeasureByCustomerProps) {
+		const measures = await prisma.measure.findMany({
+			where: {
+				customer_code,
+				measure_type,
+			},
+		});
+
+		return measures;
 	}
 }
 

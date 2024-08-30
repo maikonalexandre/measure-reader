@@ -6,11 +6,11 @@ export function getImageTypeFromBase64(base64String: string) {
 
 	switch (signature) {
 		case '/9j/4':
-			return 'jpeg'; // JPEG/JPG
+			return 'jpeg';
 		case 'iVBOR':
-			return 'png'; // PNG
+			return 'png';
 		case 'UklGR':
-			return 'webp'; // WebP
+			return 'webp';
 		default:
 			return 'unknown';
 	}

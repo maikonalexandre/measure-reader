@@ -8,7 +8,7 @@ async function seed() {
 			customer_code: 'customer_code',
 			measure_datetime: new Date(),
 			has_confirmed: true,
-			image_address: 'imgurl',
+			image_address: 'imgURL',
 			measure_type: 'GAS',
 			measure_value: 102,
 		},

@@ -42,7 +42,7 @@ export class CreateMeasureUseCase {
 
 		const newMeasure = await this.measureRepository.create({
 			customer_code,
-			image_address: `/uploads/${imageFilename}`,
+			image_address: `uploads/${imageFilename}`,
 			measure_datetime,
 			measure_type,
 			measure_value: Number.parseInt(scannedMeasure),

@@ -1,7 +1,7 @@
 import type { ImageScanRepository } from '../repositories/image-scan-repository';
 import type { ImageStorageRepository } from '../repositories/image-storage-repository';
 import type { MeasureRepository } from '../repositories/measure-repository';
-import { MeasureAlreadyExistsError } from './errors/measure-already-exists';
+import { MeasureAlreadyExistsError } from './errors/measure-already-exists-error';
 
 interface CreateMeasureProps {
 	imageBase64: string;
@@ -22,7 +22,7 @@ export class CreateMeasureUseCase {
 		measure_type,
 		imageBase64,
 	}: CreateMeasureProps) {
-		const measure = await this.measureRepository.getMeasure({
+		const measure = await this.measureRepository.getMeasureByCustomer({
 			customer_code,
 			measure_datetime,
 			measure_type,

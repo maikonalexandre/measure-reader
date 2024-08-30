@@ -15,9 +15,15 @@ app.register(appRoutes);
 
 app.setErrorHandler((error, request, reply) => {
 	if (error instanceof ZodError) {
-		return reply
-			.status(400)
-			.send({ message: 'Validation error', issues: error.format() });
+		return reply.status(400).send({
+			message: 'Os dados fornecidos no corpo da requisição são inválidos',
+			status: {
+				code: 400,
+				description: 'Os dados fornecidos no corpo da requisição são inválidos',
+			},
+			error_code: 'INVALID_DATA',
+			error_description: error.format(),
+		});
 	}
 	if (process.env.NODE_ENV !== 'production') {
 		console.error(error);

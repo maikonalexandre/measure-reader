@@ -30,3 +30,4 @@ export class ConfirmMeasureUseCase {
 		return updatedMeasure;
 	}
 }
+

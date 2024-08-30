@@ -1,8 +1,10 @@
 import { prisma } from '../../config/prisma';
 import type {
 	CreateImageProps,
-	GetMeasureProps,
+	GetMeasureByCustomerProps,
+	GetMeasureByIdProps,
 	MeasureRepository,
+	UpdateMeasure,
 } from '../measure-repository';
 
 import { endOfMonth, startOfMonth } from 'date-fns';
@@ -29,11 +31,11 @@ class PrismaMeasureRepository implements MeasureRepository {
 		return measure;
 	}
 
-	async getMeasure({
+	async getMeasureByCustomer({
 		customer_code,
 		measure_datetime,
 		measure_type,
-	}: GetMeasureProps) {
+	}: GetMeasureByCustomerProps) {
 		const startOfReceivedMonth = startOfMonth(measure_datetime);
 		const endOfReceivedMonth = endOfMonth(measure_datetime);
 
@@ -48,6 +50,28 @@ class PrismaMeasureRepository implements MeasureRepository {
 			},
 		});
 
+		return measure;
+	}
+
+	async getMeasureById({ measure_uuid }: GetMeasureByIdProps) {
+		const measure = await prisma.measure.findFirst({
+			where: {
+				id: measure_uuid,
+			},
+		});
+		return measure;
+	}
+
+	async updateMeasure({ confirmed_value, measure_uuid }: UpdateMeasure) {
+		const measure = await prisma.measure.update({
+			where: {
+				id: measure_uuid,
+			},
+			data: {
+				measure_value: confirmed_value,
+				has_confirmed: true,
+			},
+		});
 		return measure;
 	}
 }

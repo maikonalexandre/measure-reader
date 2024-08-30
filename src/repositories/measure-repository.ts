@@ -16,13 +16,26 @@ export type CreateImageProps = {
 	measure_value: number;
 };
 
-export type GetMeasureProps = {
+export type GetMeasureByCustomerProps = {
 	customer_code: string;
 	measure_datetime: Date;
 	measure_type: 'GAS' | 'WATER';
 };
 
+export type GetMeasureByIdProps = {
+	measure_uuid: string;
+};
+
+export type UpdateMeasure = {
+	measure_uuid: string;
+	confirmed_value: number;
+};
+
 export interface MeasureRepository {
 	create: (data: CreateImageProps) => Promise<Measure>;
-	getMeasure: (data: GetMeasureProps) => Promise<Measure | null>;
+	getMeasureByCustomer: (
+		data: GetMeasureByCustomerProps,
+	) => Promise<Measure | null>;
+	getMeasureById: (data: GetMeasureByIdProps) => Promise<Measure | null>;
+	updateMeasure: (data: UpdateMeasure) => Promise<Measure | null>;
 }

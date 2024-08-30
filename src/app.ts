@@ -12,7 +12,6 @@ app.register(cors, {
 	methods: ['POST', 'GET', 'PATCH', 'DELETE', 'OPTIONS'],
 });
 
-console.log(__dirname, 'uploads');
 
 app.register(require('@fastify/static'), {
 	root: join(__dirname, '..', 'uploads'),

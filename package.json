@@ -6,7 +6,9 @@
     "dev": "tsx --env-file=arquivo.env src/main.ts",
     "dev:watch": "tsx --watch --env-file=arquivo.env src/main.ts",
     "seed": "tsx ./prisma/seed.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "start:prod": "node --env-file=arquivo.env ./dist/main.js",
+    "start:migrate:prod": "prisma migrate deploy && prisma generate && npm run start:prod"
   },
   "main": "index.js",
   "license": "MIT",

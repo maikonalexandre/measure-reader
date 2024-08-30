@@ -8,8 +8,7 @@ RUN yarn install --frozen-lockfile
 
 COPY . .
 RUN yarn build
-RUN yarn prisma generate
 
 EXPOSE 3000
 
-CMD ["node", "--env-file=arquivo.env", "./dist/main.js"]
+CMD ["yarn", "start:migrate:prod"]

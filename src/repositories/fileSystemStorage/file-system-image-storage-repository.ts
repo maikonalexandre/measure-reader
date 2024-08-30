@@ -1,17 +1,29 @@
 import { randomUUID } from 'node:crypto';
-import { writeFileSync } from 'node:fs';
-import { getImageTypeFromBase64 } from '../../utils/index.js';
-import type { ImageStorageRepository } from '../image-storage-repository.js';
+import { unknownFormatError } from '../../use-cases/errors/unknown-format-error.js';
+import { getImageTypeFromBase64, writeFileAsync } from '../../utils/index.js';
+import type {
+	ImagePreview,
+	ImageStorageRepository,
+} from '../image-storage-repository.js';
 
 class FileSystemImageStorageRepository implements ImageStorageRepository {
-	async save(image: string) {
-		const imageBuffer = Buffer.from(image, 'base64');
-		const imagePath = `uploads/${randomUUID()}.jpg`;
-		writeFileSync(imagePath, imageBuffer);
+	async save(imageBase64String: string): Promise<ImagePreview> {
+		const imageType = getImageTypeFromBase64(imageBase64String);
+
+		if (imageType === 'unknown') {
+			throw new unknownFormatError();
+		}
+
+		const imageID = randomUUID();
+		const imageFilename = `${imageID}.${imageType}`;
+
+		const imageBuffer = Buffer.from(imageBase64String, 'base64');
+
+		await writeFileAsync(`uploads/${imageFilename}`, imageBuffer);
 
 		return {
-			imagePreviewURL: 'imagem.jpg',
-			imagePath,
+			imageFilename,
+			mimetype: `image/${imageType}`,
 		};
 	}
 }

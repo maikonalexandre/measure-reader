@@ -44,7 +44,7 @@ class GeminiImageScanRepository implements ImageScanRepository {
 
 		const genAI = new GoogleGenerativeAI(env.GEMINI_API_KEY);
 		const model = genAI.getGenerativeModel({
-			model: 'gemini-env.PORT.5-flash',
+			model: 'gemini-1.5-flash',
 		});
 
 		const result = await model.generateContent([

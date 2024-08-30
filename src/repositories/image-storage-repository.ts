@@ -1,8 +1,8 @@
-interface ImagePreview {
-	imagePreviewURL: string;
-	imagePath: string;
-}
+export type ImagePreview = {
+	imageFilename: string;
+	mimetype: 'image/jpeg' | 'image/png' | 'image/webp';
+};
 
 export interface ImageStorageRepository {
-	save: (image: string) => Promise<ImagePreview | null>;
+	save: (imageBase64String: string) => Promise<ImagePreview | null>;
 }

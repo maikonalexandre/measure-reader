@@ -6,7 +6,9 @@ import { fileSystemImageStorageRepository } from '../../../repositories/fileSyst
 import { geminiImageScanRepository } from '../../../repositories/gemini/gemini-image-scan-repository';
 import { prismaMeasureRepository } from '../../../repositories/prisma/prisma-measure-repository';
 import { CreateMeasureUseCase } from '../../../use-cases/create-measure';
+import { ExternalAPIConnectionError } from '../../../use-cases/errors/external-api-connection-error';
 import { MeasureAlreadyExistsError } from '../../../use-cases/errors/measure-already-exists-error';
+import { UnknownFormatError } from '../../../use-cases/errors/unknown-format-error';
 import { getImageTypeFromBase64 } from '../../../utils';
 
 const uploadImageSchema = z.object({
@@ -45,10 +47,6 @@ export async function upload(request: FastifyRequest, reply: FastifyReply) {
 
 		reply.code(200).send({
 			message: 'Operação realizada com sucesso',
-			status: {
-				code: 200,
-				description: 'Operação realizada com sucesso',
-			},
 			image_url: `${env.SERVER_BASE_URL}/${measure.image_address}`,
 			measure_value: measure.measure_value,
 			measure_uuid: measure.id,
@@ -56,17 +54,26 @@ export async function upload(request: FastifyRequest, reply: FastifyReply) {
 	} catch (error) {
 		if (error instanceof MeasureAlreadyExistsError) {
 			return reply.status(409).send({
-				message: 'Já existe uma leitura para este tipo no mês atual',
-				status: {
-					code: 409,
-					description: 'Já existe uma leitura para este tipo no mês atual',
-				},
+				message: error.message,
 				error_code: 'DOUBLE_REPORT',
 				error_description: 'Leitura do mês já realizada',
 			});
 		}
 
-		//TODO: tratar demais erros, imagem, gemini etc...
+		if (error instanceof UnknownFormatError)
+			return reply.status(404).send({
+				message: error.message,
+				error_code: 'IMAGE ERROR',
+				error_description: 'Tipo de imagem não suportado',
+			});
+
+		if (error instanceof ExternalAPIConnectionError) {
+			return reply.status(502).send({
+				message: error.message,
+				error_code: 'IMAGE ERROR',
+				error_description: 'Tipo de imagem não suportado',
+			});
+		}
 
 		throw error;
 	}

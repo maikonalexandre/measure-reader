@@ -1,5 +1,5 @@
 export class MeasureDontExistsError extends Error {
 	constructor() {
-		super("Measure don't exists");
+		super('Leitura não encontrada');
 	}
 }

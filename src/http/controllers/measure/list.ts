@@ -18,7 +18,7 @@ export async function list(request: FastifyRequest, reply: FastifyReply) {
 	const measureAvailableTypes = ['WATER', 'GAS'];
 
 	if (measure_type !== undefined) {
-		if (!measureAvailableTypes.includes(measure_type.toUpperCase())) {
+		if (!measureAvailableTypes.includes(measure_type?.toUpperCase())) {
 			reply.code(400).send({
 				message: 'Parâmetro measure type diferente de WATER ou GAS',
 				error_code: 'INVALID_TYPE',
@@ -31,7 +31,7 @@ export async function list(request: FastifyRequest, reply: FastifyReply) {
 
 		const measures = await listMeasureUseCase.execute({
 			customer_code,
-			measure_type: measure_type.toUpperCase() as 'WATER' | 'GAS' | undefined,
+			measure_type: measure_type?.toUpperCase() as 'WATER' | 'GAS' | undefined,
 		});
 
 		const refactoredMeasures = measures.map((measure) => {
@@ -51,13 +51,11 @@ export async function list(request: FastifyRequest, reply: FastifyReply) {
 		});
 	} catch (error) {
 		if (error instanceof MeasuresNotFoundError) {
-			reply
-				.code(404)
-				.send({
-					message: 'Nenhum registro encontrado',
-					error_code: 'MEASURES_NOT_FOUND',
-					error_description: 'Nenhuma leitura encontrada',
-				});
+			reply.code(404).send({
+				message: error.message,
+				error_code: 'MEASURES_NOT_FOUND',
+				error_description: 'Nenhuma leitura encontrada',
+			});
 		}
 
 		throw error;

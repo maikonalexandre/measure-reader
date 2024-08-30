@@ -1,5 +1,5 @@
 export class ExternalAPIConnectionError extends Error {
 	constructor() {
-		super('External api connection');
+		super('Gateway inválido. O serviço externo retornou um erro');
 	}
 }

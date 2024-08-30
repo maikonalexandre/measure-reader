@@ -1,5 +1,5 @@
-export class unknownFormatError extends Error {
+export class UnknownFormatError extends Error {
 	constructor() {
-		super('Image format is not supported');
+		super('Tipo de imagem não suportado');
 	}
 }

@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import { unknownFormatError } from '../../use-cases/errors/unknown-format-error.js';
+import { UnknownFormatError } from '../../use-cases/errors/unknown-format-error.js';
 import { getImageTypeFromBase64, writeFileAsync } from '../../utils/index.js';
 import type {
 	ImagePreview,
@@ -11,7 +11,7 @@ class FileSystemImageStorageRepository implements ImageStorageRepository {
 		const imageType = getImageTypeFromBase64(imageBase64String);
 
 		if (imageType === 'unknown') {
-			throw new unknownFormatError();
+			throw new UnknownFormatError();
 		}
 
 		const imageID = randomUUID();

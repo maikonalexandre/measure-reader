@@ -1,5 +1,5 @@
 export class MeasureAlreadyExistsError extends Error {
 	constructor() {
-		super('Measure already exists');
+		super('Já existe uma leitura para este tipo no mês atual');
 	}
 }

@@ -1,5 +1,5 @@
 export class MeasureAlreadyConfirmedError extends Error {
 	constructor() {
-		super('Measure already confirmed');
+		super('Leitura já confirmada');
 	}
 }

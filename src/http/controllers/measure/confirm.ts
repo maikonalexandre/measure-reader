@@ -38,7 +38,7 @@ export async function confirm(request: FastifyRequest, reply: FastifyReply) {
 					description: 'Leitura já confirmada',
 				},
 				error_code: 'MEASURE_NOT_FOUND',
-				error_description: 'Leitura do mês já realizada',
+				error_description: 'Leitura do mês já confirmada',
 			});
 		}
 
@@ -50,7 +50,7 @@ export async function confirm(request: FastifyRequest, reply: FastifyReply) {
 					description: 'Leitura não encontrada',
 				},
 				error_code: 'MEASURE_NOT_FOUND',
-				error_description: 'Leitura do mês já realizada',
+				error_description: 'Leitura do mês não encontrada',
 			});
 		}
 		throw error;

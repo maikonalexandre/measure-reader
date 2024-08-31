@@ -47,7 +47,18 @@ You will need:
 git clone git@github.com:maikonalexandre/measure-reader.git
 ```
 
-2. Start project:
+2. Install dependencies:
+
+```bash
+#run
+npm install
+# or
+pnpm install
+# or
+yarn install
+```
+
+3. Start project:
 
 ```bash
 #run

@@ -30,7 +30,7 @@
 
 - Confirmation and update: The user can confirm the reading made by the AI ​​and, if there are discrepancies, update the data.
 
-- Reading list: It is possible to list all readings recorded in the system.
+- Reading list: It is possible to list all readings recorded in the system
 
 ## 📌 Install
 

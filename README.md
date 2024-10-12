@@ -22,7 +22,7 @@
 
 ## ✨ Main features:
 
-- Image upload: The user can upload a photo of a water or gas meter.
+- Image upload: The user can upload a photo of a water or gas meter
 
 - AI-powered image processing: The application uses the Gemini model to identify and extract the number displayed on the meter.
 
